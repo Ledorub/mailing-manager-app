@@ -46,11 +46,11 @@ class Message(models.Model):
     mailing = models.ForeignKey(
         'Mailing',
         on_delete=models.CASCADE,
-        related_name='mailing'
+        related_name='messages'
     )
 
     recipient = models.ForeignKey(
         'Recipient',
         on_delete=models.CASCADE,
-        related_name='recipient'
+        related_name='messages'
     )
