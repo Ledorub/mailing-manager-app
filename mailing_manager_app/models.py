@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import FieldDoesNotExist
 
 
 class Recipient(models.Model):
@@ -11,6 +12,14 @@ class Recipient(models.Model):
 
     class Meta:
         unique_together = ('country_code', 'phone_number')
+
+    @classmethod
+    def has_field(cls, name):
+        try:
+            cls._meta.get_field(name)
+            return True
+        except FieldDoesNotExist:
+            return False
 
 
 class Mailing(models.Model):
@@ -26,7 +35,7 @@ class Message(models.Model):
     class StatusChoices(models.TextChoices):
         PENDING = 'pending'
         SENT = 'sent'
-        CANCELLED = 'canceled'
+        CANCELLED = 'cancelled'
 
     status = models.CharField(
         choices=StatusChoices.choices,
