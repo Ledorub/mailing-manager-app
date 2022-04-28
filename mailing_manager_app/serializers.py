@@ -46,17 +46,18 @@ class MailingSerializer(NonEmptyModelSerializer):
                 raise serializers.ValidationError(
                     f"Can\'t filter by nonexistent field '{k.capitalize()}'."
                 )
+        return filters
 
-    def validate_stop_time(self, value):
+    def validate_stop_time(self, stop_time):
         """
         Checks that stop time is in the future.
         """
-        current_time = pytz.utc.localize(datetime.utcnow())
-        stop_time = value.astimezone(pytz.utc)
-        if not stop_time < current_time:
+        current_time = utils.aware_utcnow()
+        if stop_time < current_time:
             raise serializers.ValidationError(
                 "'stop_time' must be in the future."
             )
+        return stop_time
 
     def validate(self, attrs):
         start_time = attrs.get('start_time')
