@@ -9,7 +9,7 @@ app_name = app_config.name
 router = DefaultRouter()
 router.register('recipient', views.RecipientViewSet, basename='recipient')
 router.register('mailing', views.MailingViewSet, basename='mailing')
-router.register('message', views.MailingViewSet, basename='message')
+router.register('message', views.MessageViewSet, basename='message')
 
 urlpatterns = [
     path('', include(router.urls))

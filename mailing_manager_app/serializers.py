@@ -76,4 +76,5 @@ class MailingSerializer(NonEmptyModelSerializer):
 
 class MessageSerializer(NonEmptyModelSerializer):
     class Meta:
-        model = models.Mailing
+        model = models.Message
+        fields = '__all__'
