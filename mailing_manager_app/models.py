@@ -66,6 +66,9 @@ class Message(models.Model):
         related_name='messages'
     )
 
+    class Meta:
+        unique_together = ('mailing', 'recipient')
+
     def _set_status(self, status):
         self.status = status
         self.save()
