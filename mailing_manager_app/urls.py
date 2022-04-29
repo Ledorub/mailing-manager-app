@@ -12,5 +12,7 @@ router.register('mailing', views.MailingViewSet, basename='mailing')
 router.register('message', views.MessageViewSet, basename='message')
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('', include(router.urls)),
+    path('stats/', views.StatsSummaryView.as_view()),
+    path('stats/<int:mailing_id>/', views.StatsDetailedView.as_view())
 ]
