@@ -15,3 +15,6 @@ __pycache__
 
 # Packaging
 Lib/
+
+# Celery
+celerybeat*

@@ -125,3 +125,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Celery
+CELERY_BROKER_URL = 'redis://localhost:6379'
+
+
+# Mailing manager app
+MAILING_REPEAT_TIMEOUT = 60 * 10
+MESSAGE_SENDER_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODI1MDA4ODMsImlzcyI6ImZhYnJpcXVlIiwibmFtZSI6ItCU0LXQvdC40YEg0JjQstCw0L3QvtCyIn0.Lm91mX2aiQl75RLvaCz2OAvfAFkqZpR-PiX0120cVME'

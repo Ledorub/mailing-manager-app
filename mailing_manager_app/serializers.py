@@ -1,8 +1,6 @@
-import pytz
 from rest_framework import serializers
 from collections import OrderedDict
-from datetime import datetime
-from mailing_manager_app import models
+from mailing_manager_app import models, utils
 
 
 class NonEmptyModelSerializer(serializers.ModelSerializer):
@@ -60,6 +58,9 @@ class MailingSerializer(NonEmptyModelSerializer):
         return stop_time
 
     def validate(self, attrs):
+        """
+        Checks that stop_time greater than start_time.
+        """
         start_time = attrs.get('start_time')
         stop_time = attrs.get('stop_time')
         if start_time >= stop_time:
@@ -70,10 +71,9 @@ class MailingSerializer(NonEmptyModelSerializer):
 
     class Meta:
         model = models.Mailing
-        fields = '__all__'
+        exclude = ('last_run_time', 'finalized')
 
 
 class MessageSerializer(NonEmptyModelSerializer):
     class Meta:
         model = models.Mailing
-        fields = '__all__'
