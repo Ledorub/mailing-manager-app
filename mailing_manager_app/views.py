@@ -1,6 +1,6 @@
 from rest_framework import viewsets, views, generics
 from rest_framework.response import Response
-from rest_framework.renderers import JSONRenderer
+from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
 from django.db.models import Count
 from mailing_manager_app import models, serializers
 
@@ -42,3 +42,11 @@ class StatsDetailedView(generics.ListAPIView):
     def get_queryset(self):
         mailing_id = self.kwargs['mailing_id']
         return models.Message.objects.filter(mailing=mailing_id)
+
+
+class DocsView(views.APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'mailing_manager_app/swagger-index.html'
+
+    def get(self, request):
+        return Response()

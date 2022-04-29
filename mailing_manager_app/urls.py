@@ -14,5 +14,6 @@ router.register('message', views.MessageViewSet, basename='message')
 urlpatterns = [
     path('', include(router.urls)),
     path('stats/', views.StatsSummaryView.as_view()),
-    path('stats/<int:mailing_id>/', views.StatsDetailedView.as_view())
+    path('stats/<int:mailing_id>/', views.StatsDetailedView.as_view()),
+    path('docs/', views.DocsView.as_view())
 ]
