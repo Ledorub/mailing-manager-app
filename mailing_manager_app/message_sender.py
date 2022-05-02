@@ -19,7 +19,7 @@ class MessageSender:
         """
         url = f'https://probe.fbrq.cloud/v1/send/{msg_id}'
         headers = {
-            'Authorization': f'Bearer {settings.MESSAGE_SENDER_TOKEN}'
+            'Authorization': f'Bearer {settings.MMA_MESSAGE_SENDER_TOKEN}'
         }
         data = {
             'id': msg_id,

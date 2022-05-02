@@ -47,7 +47,7 @@ def start_mailing():
     current_time = utils.aware_utcnow()
 
     # Prevents queue from being flooded with the same tasks every minute.
-    timeout = timedelta(seconds=settings.MAILING_REPEAT_TIMEOUT)
+    timeout = timedelta(seconds=settings.MMA_MAILING_REPEAT_TIMEOUT)
 
     mailings = models.Mailing.objects.filter(
         Q(last_run_time=None) | Q(last_run_time__lt=current_time - timeout),

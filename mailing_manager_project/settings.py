@@ -131,6 +131,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CELERY_BROKER_URL = 'redis://localhost:6379'
 
 
-# Mailing manager app
-MAILING_REPEAT_TIMEOUT = 60 * 10
-MESSAGE_SENDER_TOKEN = secret.MESSAGE_SENDER_TOKEN
+# Mailing manager app (MMA)
+MMA_MAILING_REPEAT_TIMEOUT = 60 * 10
+MMA_MESSAGE_SENDER_TOKEN = secret.MESSAGE_SENDER_TOKEN
