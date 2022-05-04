@@ -44,7 +44,7 @@ def start_mailing():
     Literally starts the mailing.
     :rtype: None
     """
-    current_time = utils.aware_utcnow()
+    current_time = utils.aware_utc_now()
 
     # Prevents queue from being flooded with the same tasks every minute.
     timeout = timedelta(seconds=settings.MMA_MAILING_REPEAT_TIMEOUT)
@@ -85,7 +85,7 @@ def send_message(**kwargs):
     phone_number = kwargs.get('country_code') + kwargs.get('phone_number')
     msg_text = kwargs.get('msg_text')
     stop_time = datetime.fromisoformat(kwargs.get('stop_time'))
-    current_time = utils.aware_utcnow()
+    current_time = utils.aware_utc_now()
 
     msg = models.Message.objects.filter(id=msg_id).first()
 
@@ -115,7 +115,7 @@ def finish_mailing():
     Updates statuses of unsent messages and marks mailing as finalized.
     :rtype: None
     """
-    current_time = utils.aware_utcnow()
+    current_time = utils.aware_utc_now()
     unfinalized_mailings = models.Mailing.objects.filter(
         stop_time__lte=current_time,
         finalized=False

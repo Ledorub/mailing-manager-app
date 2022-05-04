@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.exceptions import FieldDoesNotExist
-from mailing_manager_app.utils import aware_utcnow
+from mailing_manager_app.utils import aware_utc_now
 
 
 class Recipient(models.Model):
@@ -32,7 +32,7 @@ class Mailing(models.Model):
     finalized = models.BooleanField(default=False)
 
     def update_last_run_time(self):
-        self.last_run_time = aware_utcnow()
+        self.last_run_time = aware_utc_now()
         self.save()
 
     def finalize(self):

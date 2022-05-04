@@ -50,7 +50,7 @@ class MailingSerializer(NonEmptyModelSerializer):
         """
         Checks that stop time is in the future.
         """
-        current_time = utils.aware_utcnow()
+        current_time = utils.aware_utc_now()
         if stop_time < current_time:
             raise serializers.ValidationError(
                 "'stop_time' must be in the future."

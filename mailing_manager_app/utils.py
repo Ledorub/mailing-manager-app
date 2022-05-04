@@ -2,7 +2,7 @@ import pytz
 from datetime import datetime
 
 
-def aware_utcnow():
+def aware_utc_now():
     """
     :return: UTC time with timezone info.
     :rtype: datetime.datetime
