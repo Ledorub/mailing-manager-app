@@ -41,6 +41,7 @@ class Mailing(models.Model):
 
 
 class Message(models.Model):
+    date_created = models.DateTimeField(default=aware_utc_now)
     date_sent = models.DateTimeField(blank=True, null=True)
 
     class StatusChoices(models.TextChoices):

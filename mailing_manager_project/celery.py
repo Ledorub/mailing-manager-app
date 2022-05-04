@@ -1,6 +1,7 @@
 import os
 from celery import Celery
 from celery.schedules import crontab
+from django.conf import settings
 
 os.environ.setdefault(
     'DJANGO_SETTINGS_MODULE', 'mailing_manager_project.settings'
@@ -20,6 +21,13 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab()
     }
 }
+
+if settings.MMA_EMAIL_STATS:
+    task = {
+        'task': 'email_stats',
+        'schedule': crontab(hour=0, minute=0)
+    }
+    CELERY_BEAT_SCHEDULE['stats_mailer'] = task
 
 app.conf.update({
     'CELERY_BEAT_SCHEDULE': CELERY_BEAT_SCHEDULE

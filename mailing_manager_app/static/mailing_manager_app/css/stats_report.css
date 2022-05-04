@@ -1,0 +1,107 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  font-family: sans-serif;
+}
+
+#mailing {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+#mailing__header {
+  text-align: center;
+  margin-bottom: 2%;
+}
+
+.stats-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.stats-container__item,
+.stats-container__item * {
+  display: flex;
+}
+
+.stats-container__item {
+  width: 100%;
+  -webkit-box-shadow: 1px 1px 4px 0px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 1px 1px 4px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 1px 1px 4px 0px rgba(34, 60, 80, 0.2);
+  padding: 0.5% 2%;
+  margin: 0.5% 0;
+  border-radius: 4px;
+  justify-content: space-between;
+}
+
+.stats-container__mailing-info {
+  width: 80%;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.stats-container__mailing-info > * {
+  border-radius: 4px;
+}
+
+.stats-container__mailing-stats {
+  width: 20%;
+  margin-left: 2%;
+  justify-content: space-between;
+}
+
+.stats-container__mailing-id,
+.stats-container__mailing-msg,
+.stats-container__data-item {
+  padding: 0.4% 0;
+}
+
+.stats-container__mailing-info > * {
+  background-color: #f5f5f5;
+  align-items: center;
+}
+
+.stats-container__mailing-id {
+  width: 5%;
+  justify-content: center;
+}
+
+.stats-container__mailing-msg {
+  margin-left: 2%;
+  padding: 0 2%;
+  flex-grow: 1;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.stats-container__data-item {
+  width: 30%;
+  border-radius: 4px;
+  justify-content: center;
+  align-items: center;
+}
+
+.stats-container__data-item:last-of-type {
+  margin-right: 0;
+}
+
+.stats-container__data-item_status_success {
+  background-color: #61d480;
+}
+
+.stats-container__data-item_status_fail {
+  background-color: #db5151;
+}
+
+.stats-container__data-item_status_pending {
+  background-color: #51b2db;
+}

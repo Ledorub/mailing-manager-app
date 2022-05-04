@@ -77,4 +77,4 @@ class MailingSerializer(NonEmptyModelSerializer):
 class MessageSerializer(NonEmptyModelSerializer):
     class Meta:
         model = models.Message
-        fields = '__all__'
+        exclude = ('date_created',)

@@ -1,6 +1,9 @@
 import requests
 
 from django.conf import settings
+from django.core import mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 
 class MessageSender:
@@ -33,3 +36,29 @@ class MessageSender:
         except requests.exceptions.RequestException:
             return False
         return True
+
+
+class ReportEmailer:
+    """
+    Sends statistics to email.
+    """
+    @classmethod
+    def send_mail(cls, data):
+        """
+        Renders html and sends it to email.
+        :param data: Statistics to send.
+        :type data: list
+        :rtype: None
+        """
+        html_body = render_to_string(
+            settings.MMA_EMAIL_STATS_TEMPLATE,
+            {'mailings': data}
+        )
+        text_body = strip_tags(html_body)
+        mail.send_mail(
+            settings.MMA_EMAIL_STATS_SUBJECT,
+            text_body,
+            settings.MMA_SEND_STATS_FROM,
+            settings.MMA_EMAIL_STATS_TO,
+            html_message=html_body
+        )

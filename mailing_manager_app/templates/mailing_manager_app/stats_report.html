@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Daily mailing report</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'mailing_manager_app/css/stats_report.css' %}" />
+</head>
+<body>
+  <div id="mailing">
+    <h1  id="mailing__header">Daily mailing report</h1>
+    <div class="stats-container">
+      {% for mailing in mailings %}
+        <div class="stats-container__item">
+          <div class="stats-container__mailing-info">
+            <div class="stats-container__mailing-id">{{ mailing.id }}</div>
+            <div class="stats-container__mailing-msg">{{ mailing.msg }}</div>
+          </div>
+          <div class="stats-container__mailing-stats">
+            <div class="stats-container__data-item stats-container__data-item_status_success">{{ mailing.stats.success|default:0}}</div>
+            <div class="stats-container__data-item stats-container__data-item_status_fail">{{ mailing.stats.fail|default:0 }}</div>
+            <div class="stats-container__data-item stats-container__data-item_status_pending">{{ mailing.stats.pending|default:0 }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+</html>

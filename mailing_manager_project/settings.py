@@ -126,6 +126,11 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+EMAIL_HOST = ''
+EMAIL_PORT = 0
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 
 # Celery
 CELERY_BROKER_URL = 'redis://localhost:6379'
@@ -134,3 +139,11 @@ CELERY_BROKER_URL = 'redis://localhost:6379'
 # Mailing manager app (MMA)
 MMA_MAILING_REPEAT_TIMEOUT = 60 * 10
 MMA_MESSAGE_SENDER_TOKEN = secret.MESSAGE_SENDER_TOKEN
+
+MMA_EMAIL_STATS = True
+MMA_EMAIL_STATS_SUBJECT = 'Mailing Manager Daily Statistics'
+MMA_SEND_STATS_FROM = 'mma@example.com'
+MMA_EMAIL_STATS_TO = [
+    'sifoje2041@angeleslid.com'
+]
+MMA_EMAIL_STATS_TEMPLATE = 'mailing_manager_app/stats_email.html'

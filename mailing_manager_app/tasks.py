@@ -1,10 +1,11 @@
 from datetime import datetime, timedelta
 from django.conf import settings
 from django.db import transaction
-from django.db.models import Q
+from django.db.models import Q, Prefetch
 from mailing_manager_project.celery import app
 from mailing_manager_app import models, utils
-from mailing_manager_app.message_sender import MessageSender
+from mailing_manager_app.message_sender import MessageSender, ReportEmailer
+from mailing_manager_app.stats import get_mailings_stats
 
 
 status = models.Message.StatusChoices
@@ -130,3 +131,20 @@ def finish_mailing():
                 if msg.status == status.PENDING:
                     msg.set_status_fail()
             mailing.finalize()
+
+
+@app.task(name='email_stats')
+def email_stats():
+    today_midnight = utils.aware_utc_midnight()
+    yesterday_midnight = utils.aware_utc_midnight() - timedelta(days=1)
+    messages = Prefetch(
+        'messages',
+        models.Message.objects.filter(
+            date_created__gte=yesterday_midnight,
+            date_created__lt=today_midnight
+        )
+    )
+    mailings = models.Mailing.objects.prefetch_related(messages)
+    stats = get_mailings_stats(mailings)
+    if stats:
+        ReportEmailer.send_mail(stats)
