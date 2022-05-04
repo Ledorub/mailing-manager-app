@@ -662,17 +662,26 @@ const CONFIG = {
               "type" : "integer",
               "format" : "int64"
             },
-            "pending" : {
-              "type" : "integer",
-              "format" : "int32"
+            "msg" : {
+              "type" : "string",
+              "example" : "Hello, world!"
             },
-            "fail" : {
-              "type" : "integer",
-              "format" : "int32"
-            },
-            "success" : {
-              "type" : "integer",
-              "format" : "int32"
+            "stats" : {
+              "type" : "object",
+              "properties" : {
+                "pending" : {
+                  "type" : "integer",
+                  "format" : "int32"
+                },
+                "fail" : {
+                  "type" : "integer",
+                  "format" : "int32"
+                },
+                "success" : {
+                  "type" : "integer",
+                  "format" : "int32"
+                }
+              }
             }
           }
         }

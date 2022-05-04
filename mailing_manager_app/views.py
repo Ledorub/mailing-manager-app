@@ -2,7 +2,7 @@ from rest_framework import viewsets, views, generics
 from rest_framework.response import Response
 from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
 from django.db.models import Count
-from mailing_manager_app import models, serializers
+from mailing_manager_app import models, serializers, stats
 
 
 class RecipientViewSet(viewsets.ModelViewSet):
@@ -24,15 +24,8 @@ class StatsSummaryView(views.APIView):
     renderer_classes = [JSONRenderer]
 
     def get(self, request):
-        result = []
-        for mailing in models.Mailing.objects.all():
-            statuses = mailing.messages.values('status').annotate(count=Count('status'))
-
-            mailing_result = {'id': mailing.id}
-            for status in statuses:
-                mailing_result[status['status']] = status['count']
-            result.append(mailing_result)
-
+        mailings = models.Mailing.objects.all()
+        result = stats.get_mailings_stats(mailings)
         return Response(result)
 
 
