@@ -8,6 +8,10 @@ Celery and Redis are used to implement async tasks.
 
 [[_TOC_]]
 
+## Features
+- Daily email reports;
+- Interactive (SwaggerUI) docs at `/docs`.
+
 ## Getting Started
 
 ### Messing with settings
